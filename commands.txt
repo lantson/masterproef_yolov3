@@ -1,0 +1,15 @@
+
+
+trainen met darknet weights: python train.py --dataset EIGEN_CODE/annotations/train.record --val_dataset EIGEN_CODE/annotations/test.record --classes EIGEN_CODE/data/classes.names --num_classes 1 --tiny --epochs 100 --mode fit --transfer darknet --weights checkpoints/yolov3-tiny.tf --weights_num_classes 80
+trainen op reeds getraind model (dus finetunen): python train.py --dataset EIGEN_CODE/annotations/train.record --val_dataset EIGEN_CODE/annotations/test.record --classes EIGEN_CODE/data/classes.names --num_classes 1 --tiny --epochs 100 --mode fit --transfer fine_tune --weights checkpoints/yolov3_train_100.tf --weights_num_classes 1
+
+detecteren: python detect.py --tiny --weights checkpoints/yolov3_train_100.tf --image ./data/test.jpg --num_classes 1 --yolo_iou_threshold 0.5 --yolo_score_threshold 0.5 --classes EIGEN_CODE/data/classes.names
+
+detecteren video: python detect.py --tiny --weights checkpoints/yolov3_train_2_images400.tf --image ./data/t --num_classes 1 --yolo_iou_threshold 0.5 --yolo_score_threshold 0.5 --classes EIGEN_CODE/data/classes.names --video ./data/video_dynamic
+
+
+
+trainen scratch: python train.py --dataset EIGEN_CODE/annotations/train.record --val_dataset EIGEN_CODE/annotations/test.record --classes EIGEN_CODE/data/classes.names --num_classes 1 --tiny --epochs 10 --mode fit --transfer none
+trainen vanop reeds getraind (zonder freezing van lagen): python train.py --dataset EIGEN_CODE/annotations/train.record --val_dataset EIGEN_CODE/annotations/test.record --classes EIGEN_CODE/data/classes.names --num_classes 1 --tiny --epochs 100 --mode fit --transfer continue --weights checkpoints/yolov3_train_2_images100.tf --weights_num_classes 1
+detecteren: python detect.py --tiny --weights checkpoints/yolov3_train_2_images100.tf --image ./data/train --num_classes 1 --yolo_iou_threshold 0.5 --yolo_score_threshold 0.5 --classes EIGEN_CODE/data/classes.names
+detecteren van een map met images: python detect.py --tiny --weights checkpoints/yolov3_9M_parameters_44.tf --image ./data/train --num_classes 1 --yolo_iou_threshold 0.5 --yolo_score_threshold 0.5 --classes EIGEN_CODE/data/classes.names --multiple_images data/test
