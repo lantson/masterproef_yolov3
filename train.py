@@ -40,7 +40,7 @@ flags.DEFINE_enum('transfer', 'none',
                   'continue: Transfer prev model and dont freeze anything!')
 flags.DEFINE_integer('size', 208, 'image size')
 flags.DEFINE_integer('epochs', 2, 'number of epochs')
-flags.DEFINE_integer('batch_size', 4, 'batch size')
+flags.DEFINE_integer('batch_size', 8, 'batch size')
 flags.DEFINE_float('learning_rate', 1e-3, 'learning rate')
 flags.DEFINE_integer('num_classes', 80, 'number of classes in the model')
 flags.DEFINE_integer('weights_num_classes', None, 'specify num class for `weights` file if different, '
@@ -217,17 +217,16 @@ def main(_argv):
       
         print(model.summary())
         
-        """history = model.fit(train_dataset,
+	history = model.fit(train_dataset,
                             epochs=FLAGS.epochs,
                             callbacks=callbacks,
                             validation_data=val_dataset)
-        """
+
         end_time = time.time() - start_time
         
         print(f'Total Training Time: {end_time}')
         
-        """
-        """
+
         print("done")
 
 
